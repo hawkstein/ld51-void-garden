@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && npm version minor",
+    "justbuild": "vite build",
     "postversion": "git push && git push --tags",
     "publish": "zip -r dist.zip dist && butler push dist.zip hawkhelm/void-garden:html5",
     "preview": "vite preview"
