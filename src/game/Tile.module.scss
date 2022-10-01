@@ -1,0 +1,14 @@
+.background {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 1px dashed black;
+  border-radius: 100%;
+  display: grid;
+  place-content: center;
+}
+
+.label {
+  pointer-events: none;
+  user-select: none;
+}

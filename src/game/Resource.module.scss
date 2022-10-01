@@ -1,0 +1,12 @@
+.resource {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  border: 1px solid black;
+  border-radius: 100%;
+  display: grid;
+  place-content: center;
+  background-color: yellow;
+  user-select: none;
+}
