@@ -26,6 +26,7 @@ const tiles: TileData[] = [
 const gameMachine = createMachine(
   {
     predictableActionArguments: true,
+    preserveActionOrder: true,
     id: "game",
     context: {
       tiles,
@@ -36,8 +37,11 @@ const gameMachine = createMachine(
     schema: {
       events: {} as GameEvent,
     },
-    initial: "ready",
+    initial: "init",
     states: {
+      init: {
+        after: { 100: "ready" },
+      },
       ready: {
         entry: ["spawnSeed"],
         always: { target: "play" },
