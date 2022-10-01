@@ -1,0 +1,39 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.layout {
+  max-width: 300px;
+  @media (min-width: 500px) {
+    max-width: 480px;
+  }
+  @media (min-width: 800px) {
+    max-width: 780px;
+  }
+  @media (min-width: 1020px) {
+    max-width: 1000px;
+  }
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  margin: 0 auto;
+  background-color: var(--mantine-color-blue-1);
+  position: relative;
+}
+
+p,
+li {
+  color: var(--mantine-color-gray-8);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Permanent Marker", cursive;
+  color: var(--mantine-color-gray-8);
+}

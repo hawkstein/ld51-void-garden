@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LD51 - Void Garden</title>
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+
+      #init {
+        display: grid;
+        position: fixed;
+        top: 0;
+        left: 0;
+        place-content: center;
+        width: 100vw;
+        height: 100vh;
+        transition: opacity 0.2s ease;
+        background-color: #339af0;
+      }
+
+      .hidden {
+        opacity: 0;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="init" class="hidden">
+      <h1>Initialising game...</h1>
+    </div>
+    <div id="root"></div>
+    <script id="main" type="module" src="/src/main.tsx"></script>
+    <script>
+      let mainScript = document.getElementById("main")
+      if (!mainScript) {
+        const scripts = document.head.getElementsByTagName("script")
+        mainScript = Array.from(scripts).find((script) =>
+          script.src.includes("/assets/index.")
+        )
+      }
+      const message = document.getElementById("init")
+      const displayTimer = setTimeout(() => {
+        message.classList.remove(["hidden"])
+      }, 300)
+      mainScript.onload = () => {
+        clearTimeout(displayTimer)
+        if (!message.classList.contains("hidden")) {
+          message.classList.remove(["hidden"])
+          setTimeout(() => {
+            message.parentNode.removeChild(message)
+          }, 300)
+        } else {
+          message.parentNode.removeChild(message)
+        }
+      }
+    </script>
+  </body>
+</html>

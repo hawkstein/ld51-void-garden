@@ -1,0 +1,41 @@
+{
+  "name": "ld51-void-garden",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && npm version minor",
+    "postversion": "git push && git push --tags",
+    "publish": "zip -r dist.zip dist && butler push dist.zip hawkhelm/ld51-react-template:html5",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@mantine/core": "^5.4.1",
+    "@mantine/hooks": "^5.4.1",
+    "@mantine/modals": "^5.4.1",
+    "@sentry/react": "^7.14.0",
+    "@sentry/tracing": "^7.14.0",
+    "@supabase/supabase-js": "^1.35.7",
+    "@tanstack/react-query": "^4.6.1",
+    "@xstate/react": "^3.0.1",
+    "framer-motion": "^7.3.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.36.0",
+    "sass": "^1.55.0",
+    "use-sound": "^4.0.1",
+    "xstate": "^4.33.6",
+    "zustand": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.7",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vite-plugin-svgr": "^2.2.1"
+  }
+}
