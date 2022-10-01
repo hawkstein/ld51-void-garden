@@ -12,6 +12,7 @@ const spawnSeed = assign<GameContext, GameEvent>({
         x: tile.x,
         y: tile.y,
         type: VorgType.Seed,
+        health: 2,
         resourceSpawns: [
           { offsetX: 5, offsetY: 5, type: ResourceType.Compound },
           { offsetX: 40, offsetY: 5, type: ResourceType.Compound },
