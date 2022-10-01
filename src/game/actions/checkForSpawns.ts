@@ -9,7 +9,7 @@ import {
 } from "../gameTypes"
 
 const checkForSpawns = assign<GameContext, GameEvent>({
-  vorgs: (context, event) => {
+  vorgs: (context) => {
     const tiles = context.tileResources.reduce<Record<string, ResourceData[]>>(
       (collection, tile) => {
         if (tile.parent) {
@@ -32,9 +32,10 @@ const checkForSpawns = assign<GameContext, GameEvent>({
         )
         return {
           id: uniqueId(),
-          x: parentTile?.x,
-          y: parentTile?.y,
+          x: parentTile?.x ?? 0,
+          y: parentTile?.y ?? 0,
           type: VorgType.Collector,
+          health: 2,
           resourceSpawns: [
             { offsetX: 5, offsetY: 5, type: ResourceType.Energy },
             { offsetX: 40, offsetY: 5, type: ResourceType.Energy },

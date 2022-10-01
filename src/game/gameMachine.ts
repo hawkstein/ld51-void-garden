@@ -4,6 +4,8 @@ import checkForSpawns from "./actions/checkForSpawns"
 import handleResourceDrop from "./actions/handleResourceDrop"
 import handleResourceTileDrop from "./actions/handleResourceTileDrop"
 import reduceSeedStores from "./actions/reduceSeedStores"
+import removeResources from "./actions/removeResources"
+import removeVorgs from "./actions/removeVorgs"
 import spawnResources from "./actions/spawnResources"
 import spawnSeed from "./actions/spawnSeed"
 import { GameContext, GameEvent, TileData } from "./gameTypes"
@@ -61,7 +63,7 @@ const gameMachine = createMachine(
             },
           },
           resolveTick: {
-            entry: ["checkForSpawns", "removeResources"],
+            entry: ["removeVorgs", "checkForSpawns", "removeResources"],
             after: { 1000: "setupTick" },
           },
         },
@@ -74,12 +76,10 @@ const gameMachine = createMachine(
       spawnResources,
       reduceSeedStores,
       checkForSpawns,
-      removeResources: assign({
-        resources: (context) => [],
-        tileResources: (context) => [],
-      }),
+      removeResources,
       handleResourceDrop,
       handleResourceTileDrop,
+      removeVorgs,
     },
   }
 )

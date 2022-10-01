@@ -19,6 +19,7 @@ export type VorgData = {
   type: VorgType
   resourceSpawns: ResourceSpawn[]
   storedResources?: { type: ResourceType; amount: number }[]
+  health: number
 }
 
 export enum ResourceType {
