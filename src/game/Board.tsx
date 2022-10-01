@@ -25,7 +25,7 @@ export default function Board({ paused = false }: BoardProps) {
     return () => {
       clearInterval(id)
     }
-  }, [paused, send])
+  }, [paused])
 
   const boardContainer = useRef<HTMLDivElement>(null)
 
