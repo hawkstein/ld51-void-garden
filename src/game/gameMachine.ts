@@ -1,19 +1,11 @@
 import { createMachine, assign } from "xstate"
 import { uniqueId } from "xstate/lib/utils"
-import isColliding from "../utils/circleCollision"
 import checkForSpawns from "./actions/checkForSpawns"
 import handleResourceDrop from "./actions/handleResourceDrop"
 import handleResourceTileDrop from "./actions/handleResourceTileDrop"
 import spawnResources from "./actions/spawnResources"
 import spawnVorg from "./actions/spawnVorg"
-import {
-  GameContext,
-  GameEvent,
-  ResourceData,
-  ResourceType,
-  TileData,
-  VorgType,
-} from "./gameTypes"
+import { GameContext, GameEvent, TileData } from "./gameTypes"
 
 const tiles: TileData[] = [
   { id: uniqueId(), x: 50, y: 100 },
@@ -87,47 +79,3 @@ const gameMachine = createMachine(
 )
 
 export default gameMachine
-
-// spawnVorgs: assign({
-//   spawnedVorgs: (context) =>
-//     context.vorgs.map((vorg) => spawn(vorgMachine, vorg.type)),
-// }),
-// resolveVorgs: pure((context, event) => {
-//   return context.spawnedVorgs.map((vorg) => {
-//     return send("RESOLVE", { to: vorg })
-//   })
-// }),
-
-// const vorgMachine = createMachine(
-//   {
-//     predictableActionArguments: true,
-//     id: "vorg",
-//     context: {
-//       x: 250,
-//       y: 100,
-//       type: "collector",
-//     } as VorgData,
-//     initial: "ready",
-//     states: {
-//       ready: {
-//         on: {
-//           RESOLVE: "resolve",
-//         },
-//       },
-//       resolve: {
-//         entry: ["logEntry"],
-//       },
-//     },
-//   },
-//   {
-//     actions: {
-//       logEntry: () => {
-//         console.log("LOG RESOLVE")
-//       },
-//     },
-//   }
-// )
-
-// const { pure } = actions
-
-// spawnedVorgs: ActorRefFrom<typeof vorgMachine>[]
