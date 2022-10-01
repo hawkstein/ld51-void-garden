@@ -1,4 +1,4 @@
-export type TileData = { id: string; x: number; y: number }
+export type TileData = { id: string; x: number; y: number; vorgId?: string }
 
 export enum VorgType {
   Seed = "Seed",

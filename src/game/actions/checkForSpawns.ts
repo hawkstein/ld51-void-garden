@@ -38,7 +38,10 @@ const checkForSpawns = assign<GameContext, GameEvent>({
   vorgs: (context) => {
     const tiles = context.tileResources.reduce<Record<string, ResourceData[]>>(
       (collection, tile) => {
-        if (tile.parent) {
+        const parent = context.tiles.find(
+          (contextTile) => contextTile.id === tile.parent
+        )
+        if (tile.parent && !parent?.vorgId) {
           return {
             ...collection,
             [tile.parent]: collection[tile.parent]
@@ -61,8 +64,13 @@ const checkForSpawns = assign<GameContext, GameEvent>({
           throw new Error("No matching vorg for these resources!")
         }
         const resourceSpawns = matchResourcesToType(type)
+        const id = uniqueId()
+        if (parentTile) {
+          // Bad mutation
+          parentTile.vorgId = id
+        }
         return {
-          id: uniqueId(),
+          id,
           x: parentTile?.x ?? 0,
           y: parentTile?.y ?? 0,
           type,

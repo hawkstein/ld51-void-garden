@@ -2,13 +2,15 @@ import { assign } from "xstate"
 import { uniqueId } from "xstate/lib/utils"
 import { GameContext, GameEvent, ResourceType, VorgType } from "../gameTypes"
 
-const spawnSeed = assign<GameContext, GameEvent>({
-  vorgs: (context) => {
-    const tile = context.tiles[Math.floor(Math.random() * 4)]
-    return [
+const spawnSeed = assign<GameContext, GameEvent>((context) => {
+  const tile = context.tiles[Math.floor(Math.random() * 4)]
+  const id = uniqueId()
+  tile.vorgId = id
+  return {
+    vorgs: [
       ...context.vorgs,
       {
-        id: uniqueId(),
+        id,
         x: tile.x,
         y: tile.y,
         type: VorgType.Seed,
@@ -19,8 +21,9 @@ const spawnSeed = assign<GameContext, GameEvent>({
         ],
         storedResources: [{ type: ResourceType.Compound, amount: 4 }],
       },
-    ]
-  },
+    ],
+    tiles: context.tiles,
+  }
 })
 
 export default spawnSeed
