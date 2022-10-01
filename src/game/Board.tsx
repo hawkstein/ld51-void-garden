@@ -59,15 +59,23 @@ export default function Board({ paused = false }: BoardProps) {
           return <Vorg key={id} x={x} y={y} label={type} />
         })}
         <AnimatePresence>
-          {resources.map(({ x, y, id }) => (
-            <Resource key={id} id={id} x={x} y={y} onDragEnd={handleDragEnd} />
-          ))}
-        </AnimatePresence>
-        <AnimatePresence>
-          {tileResources.map(({ x, y, id }) => (
+          {resources.map(({ x, y, id, type }) => (
             <Resource
               key={id}
               id={id}
+              type={type}
+              x={x}
+              y={y}
+              onDragEnd={handleDragEnd}
+            />
+          ))}
+        </AnimatePresence>
+        <AnimatePresence>
+          {tileResources.map(({ x, y, id, type }) => (
+            <Resource
+              key={id}
+              id={id}
+              type={type}
               x={x}
               y={y}
               onDragEnd={handleTileDragEnd}
