@@ -8,12 +8,16 @@ import spawnVorg from "./actions/spawnVorg"
 import { GameContext, GameEvent, TileData } from "./gameTypes"
 
 const tiles: TileData[] = [
-  { id: uniqueId(), x: 50, y: 100 },
-  { id: uniqueId(), x: 250, y: 100 },
-  { id: uniqueId(), x: 450, y: 100 },
-  { id: uniqueId(), x: 150, y: 200 },
-  { id: uniqueId(), x: 350, y: 200 },
-  { id: uniqueId(), x: 250, y: 300 },
+  { id: uniqueId(), x: 20, y: 100 },
+  { id: uniqueId(), x: 220, y: 100 },
+  { id: uniqueId(), x: 420, y: 100 },
+  { id: uniqueId(), x: 620, y: 100 },
+  { id: uniqueId(), x: 120, y: 200 },
+  { id: uniqueId(), x: 320, y: 200 },
+  { id: uniqueId(), x: 520, y: 200 },
+  { id: uniqueId(), x: 220, y: 300 },
+  { id: uniqueId(), x: 420, y: 300 },
+  { id: uniqueId(), x: 320, y: 400 },
 ]
 
 const gameMachine = createMachine(
