@@ -3,8 +3,9 @@ import { uniqueId } from "xstate/lib/utils"
 import checkForSpawns from "./actions/checkForSpawns"
 import handleResourceDrop from "./actions/handleResourceDrop"
 import handleResourceTileDrop from "./actions/handleResourceTileDrop"
+import reduceSeedStores from "./actions/reduceSeedStores"
 import spawnResources from "./actions/spawnResources"
-import spawnVorg from "./actions/spawnVorg"
+import spawnSeed from "./actions/spawnSeed"
 import { GameContext, GameEvent, TileData } from "./gameTypes"
 
 const tiles: TileData[] = [
@@ -36,14 +37,14 @@ const gameMachine = createMachine(
     initial: "ready",
     states: {
       ready: {
-        entry: ["spawnVorg"],
+        entry: ["spawnSeed"],
         always: { target: "play" },
       },
       play: {
         initial: "setupTick",
         states: {
           setupTick: {
-            entry: ["spawnResources"],
+            entry: ["spawnResources", "reduceSeedStores"],
             after: { 1000: "handleTick" },
           },
           handleTick: {
@@ -69,8 +70,9 @@ const gameMachine = createMachine(
   },
   {
     actions: {
-      spawnVorg,
+      spawnSeed,
       spawnResources,
+      reduceSeedStores,
       checkForSpawns,
       removeResources: assign({
         resources: (context) => [],
