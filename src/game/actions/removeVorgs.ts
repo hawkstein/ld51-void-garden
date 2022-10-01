@@ -7,7 +7,7 @@ const removeVorgs = assign<GameContext, GameEvent>({
     const emptySeeds = context.vorgs.filter(
       (vorg) =>
         vorg.type === VorgType.Seed &&
-        vorg.storedResources?.some((resource) => resource.amount > 0)
+        vorg.storedResources?.every((resource) => resource.amount <= 0)
     )
     const vorgs = context.vorgs.filter(
       (vorg) =>

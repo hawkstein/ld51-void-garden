@@ -50,8 +50,12 @@ const gameMachine = createMachine(
         initial: "setupTick",
         states: {
           setupTick: {
-            entry: ["spawnResources", "reduceSeedStores"],
-            after: { 1000: "handleTick" },
+            entry: ["spawnResources"],
+            after: { 1000: "tidyUp" },
+          },
+          tidyUp: {
+            entry: ["reduceSeedStores"],
+            always: { target: "handleTick" },
           },
           handleTick: {
             after: { 10000: "resolveTick" },
