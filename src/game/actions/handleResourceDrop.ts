@@ -16,17 +16,22 @@ const handleResourceDrop = assign<GameContext, GameEvent>((context, event) => {
     )
     const removed = duplicateResources.splice(collidingResource, 1).pop()
     const updatedTile = context.tiles[collision]
+    let tileResources
+    if (removed) {
+      const updated = {
+        ...removed,
+        parent: updatedTile.id,
+        x: updatedTile.x,
+        y: updatedTile.y + 80,
+      }
+      tileResources = [...context.tileResources, updated]
+    } else {
+      tileResources = context.tileResources
+    }
+
     return {
       resources: duplicateResources,
-      tileResources: [
-        ...context.tileResources,
-        {
-          ...removed,
-          parent: updatedTile.id,
-          x: updatedTile.x,
-          y: updatedTile.y + 80,
-        },
-      ],
+      tileResources,
     }
   }
   return context
