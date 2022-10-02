@@ -45,54 +45,61 @@ export default function Board({ paused = false }: BoardProps) {
   const vorgs = state.context.vorgs
   const resources = state.context.resources
   const tileResources = state.context.tileResources
+  const isGameOver = state.matches("gameover")
   return (
     <>
       <div>{state.toStrings().join(", ")}</div>
-      <div
-        ref={boardContainer}
-        style={{ width: "700px", height: "600px", position: "relative" }}
-      >
-        {tiles.map(({ id, x, y }) => (
-          <Tile key={id} x={x} y={y} label={id} />
-        ))}
-        {vorgs.map(({ id, x, y, type, health }) => {
-          return (
-            <Vorg
-              key={id}
-              x={x}
-              y={y}
-              label={type}
-              type={type}
-              health={health}
-              debug
-            />
-          )
-        })}
-        <AnimatePresence>
-          {resources.map(({ x, y, id, type }) => (
-            <Resource
-              key={id}
-              id={id}
-              type={type}
-              x={x}
-              y={y}
-              onDragEnd={handleDragEnd}
-            />
+      {isGameOver ? (
+        <>
+          <h2>Game over man! No vacuum organims left!</h2>
+        </>
+      ) : (
+        <div
+          ref={boardContainer}
+          style={{ width: "700px", height: "600px", position: "relative" }}
+        >
+          {tiles.map(({ id, x, y }) => (
+            <Tile key={id} x={x} y={y} label={id} />
           ))}
-        </AnimatePresence>
-        <AnimatePresence>
-          {tileResources.map(({ x, y, id, type }) => (
-            <Resource
-              key={id}
-              id={id}
-              type={type}
-              x={x}
-              y={y}
-              onDragEnd={handleTileDragEnd}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
+          {vorgs.map(({ id, x, y, type, health }) => {
+            return (
+              <Vorg
+                key={id}
+                x={x}
+                y={y}
+                label={type}
+                type={type}
+                health={health}
+                debug
+              />
+            )
+          })}
+          <AnimatePresence>
+            {resources.map(({ x, y, id, type }) => (
+              <Resource
+                key={id}
+                id={id}
+                type={type}
+                x={x}
+                y={y}
+                onDragEnd={handleDragEnd}
+              />
+            ))}
+          </AnimatePresence>
+          <AnimatePresence>
+            {tileResources.map(({ x, y, id, type }) => (
+              <Resource
+                key={id}
+                id={id}
+                type={type}
+                x={x}
+                y={y}
+                onDragEnd={handleTileDragEnd}
+              />
+            ))}
+          </AnimatePresence>
+        </div>
+      )}
     </>
   )
 }

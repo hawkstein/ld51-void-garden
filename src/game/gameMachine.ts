@@ -82,12 +82,30 @@ const gameMachine = createMachine(
           },
           resolveTick: {
             entry: ["removeVorgs", "removeResources"],
-            after: { 1000: "setupTick" },
+            after: {
+              1000: [
+                { target: "finished", cond: "playerHasWonOrLost" },
+                { target: "setupTick" },
+              ],
+            },
+          },
+          finished: {
+            type: "final",
           },
         },
+        onDone: [
+          {
+            target: "gameover",
+            cond: "playerHasLost",
+          },
+          {
+            target: "success",
+            cond: "playerHasWon",
+          },
+        ],
       },
-      gameover: {},
-      success: {},
+      gameover: { type: "final" },
+      success: { type: "final" },
     },
   },
   {
@@ -101,6 +119,11 @@ const gameMachine = createMachine(
       handleResourceDrop,
       handleResourceTileDrop,
       removeVorgs,
+    },
+    guards: {
+      playerHasWonOrLost: (context) => context.vorgs.length === 0,
+      playerHasWon: (context) => false,
+      playerHasLost: (context) => context.vorgs.length === 0,
     },
   }
 )
