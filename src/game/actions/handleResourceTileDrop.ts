@@ -16,8 +16,12 @@ const handleResourceTileDrop = assign<GameContext, GameEvent>(
         (resource) => resource.id === event.id
       )
       const updatedTile = context.tiles[collision]
+      const otherResourcesOnThatTile = context.tileResources.filter(
+        (resource) => resource.parent === updatedTile.id
+      )
       if (collidingResource) {
-        collidingResource.x = updatedTile.x
+        collidingResource.x =
+          updatedTile.x + 30 * otherResourcesOnThatTile.length
         collidingResource.y = updatedTile.y + 80
         collidingResource.id = uniqueId()
         collidingResource.parent = updatedTile.id
