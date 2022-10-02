@@ -6,12 +6,23 @@
   border-radius: 100%;
   display: grid;
   place-content: center;
-  background-color: peachpuff;
 }
 
 .label {
   pointer-events: none;
   user-select: none;
+}
+
+.seed {
+  background-color: peachpuff;
+}
+
+.collector {
+  background-color: palegreen;
+}
+
+.extractor {
+  background-color: lightseagreen;
 }
 
 .damaged {

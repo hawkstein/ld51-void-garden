@@ -57,7 +57,15 @@ export default function Board({ paused = false }: BoardProps) {
         ))}
         {vorgs.map(({ id, x, y, type, health }) => {
           return (
-            <Vorg key={id} x={x} y={y} label={type} health={health} debug />
+            <Vorg
+              key={id}
+              x={x}
+              y={y}
+              label={type}
+              type={type}
+              health={health}
+              debug
+            />
           )
         })}
         <AnimatePresence>
