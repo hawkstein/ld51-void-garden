@@ -2,6 +2,10 @@ import { motion } from "framer-motion"
 import { useRef } from "react"
 import { ResourceType } from "./gameTypes"
 import styles from "./Resource.module.scss"
+import { ReactComponent as Energy } from "./Energy.svg"
+import { ReactComponent as Compound } from "./Compound.svg"
+import { ReactComponent as Exotic } from "./Exotic.svg"
+import { ReactComponent as Fruit } from "./Fruit.svg"
 
 type ResourceProps = {
   id: string
@@ -11,11 +15,20 @@ type ResourceProps = {
   onDragEnd: (x: number, y: number, id: string) => void
 }
 
+const mappedComponents = {
+  [ResourceType.Energy]: <Energy />,
+  [ResourceType.Compound]: <Compound />,
+  [ResourceType.Exotic]: <Exotic />,
+  [ResourceType.Seed]: <Fruit />,
+}
+
+const getComponent = (type: ResourceType) => mappedComponents[type]
+
 const mappedStyles = {
   [ResourceType.Energy]: styles.energy,
   [ResourceType.Compound]: styles.compound,
   [ResourceType.Exotic]: styles.exotic,
-  [ResourceType.Seed]: styles.exotic,
+  [ResourceType.Seed]: styles.seed,
 }
 
 const getStyle = (type: ResourceType) => mappedStyles[type]
@@ -51,7 +64,7 @@ export default function Resource({ id, type, x, y, onDragEnd }: ResourceProps) {
       className={`${styles.resource} ${getStyle(type)}`}
       style={{ left: x, top: y }}
     >
-      {getLabel(type)}
+      {getComponent(type)}
     </motion.div>
   )
 }

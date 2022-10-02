@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .compoundsvg2,
+      .compoundsvg3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .compoundsvg3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g>
+    <circle fill="#2ad2c9" cx="14" cy="14" r="14" />
+    <circle cx="13.94" cy="7.59" r="3.35" />
+    <circle cx="8.35" cy="17.65" r="3.35" />
+    <circle cx="20.65" cy="17.65" r="3.35" />
+    <line class="compoundsvg2" x1="12.82" y1="9.82" x2="8.35" y2="17.65" />
+    <line class="compoundsvg2" x1="15.04" y1="8.72" x2="19.55" y2="16.52" />
+    <line class="compoundsvg3" x1="8.35" y1="17.65" x2="20.65" y2="17.65" />
+  </g>
+</svg>

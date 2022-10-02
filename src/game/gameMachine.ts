@@ -42,7 +42,7 @@ const gameMachine = createMachine(
       vorgs: [],
       resources: [],
       tileResources: [],
-      guides: ["intro", "collector", "extractor", "end"],
+      guides: ["intro", "collector", "extractor", "exotic", "end"],
       guideTarget: { x: 0, y: 0, withArrow: true },
       currentGuide: null,
       countdown: 1,

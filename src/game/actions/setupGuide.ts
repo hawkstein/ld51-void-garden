@@ -36,6 +36,18 @@ const setupGuide = assign<GameContext, GameEvent>((context, event) => {
       x = 700 / 2
       y = 500 / 2
     }
+  } else if (nextGuide === "exotic") {
+    const extractor = context.vorgs.find(
+      (vorg) => vorg.type === VorgType.Extractor
+    )
+    if (extractor) {
+      x = extractor.x
+      y = extractor.y + 80
+    } else {
+      withArrow = false
+      x = 700 / 2
+      y = 500 / 2
+    }
   } else if (nextGuide === "end") {
     withArrow = false
     x = 700 / 2

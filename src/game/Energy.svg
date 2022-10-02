@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .energyclass {
+        fill: #fce300;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2-2">
+    <circle class="energyclass" cx="14" cy="14" r="14" />
+    <path
+      d="M7.89,7.66l11.05-2.75c.27-.07,.51,.2,.41,.46l-3.03,8.38c-.1,.28,.16,.55,.44,.45l3.96-1.34c.33-.11,.6,.27,.39,.55l-9.4,11.99c-.22,.28-.67,.09-.62-.26l1.11-8.41c.04-.28-.26-.49-.51-.36l-1.77,.93c-.21,.11-.47-.02-.51-.25l-1.52-9.39" />
+  </g>
+</svg>

@@ -24,7 +24,9 @@ export default function Board({ paused = false }: BoardProps) {
     clock: simulatedClock,
     context: {
       ...gameMachine.context,
-      guides: tutorial ? ["intro", "collector", "extractor", "end"] : [],
+      guides: tutorial
+        ? ["intro", "collector", "extractor", "exotic", "end"]
+        : [],
     },
   })
   useEffect(() => {
