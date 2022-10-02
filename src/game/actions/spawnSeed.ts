@@ -18,8 +18,9 @@ const spawnSeed = assign<GameContext, GameEvent>((context) => {
         resourceSpawns: [
           { offsetX: 5, offsetY: 5, type: ResourceType.Compound },
           { offsetX: 40, offsetY: 5, type: ResourceType.Compound },
+          { offsetX: 75, offsetY: 5, type: ResourceType.Compound },
         ],
-        storedResources: [{ type: ResourceType.Compound, amount: 4 }],
+        storedResources: [{ type: ResourceType.Compound, amount: 9 }],
       },
     ],
     tiles: context.tiles,

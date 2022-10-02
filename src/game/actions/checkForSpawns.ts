@@ -6,6 +6,7 @@ import {
   ResourceData,
   VorgType,
   ResourceType,
+  VorgData,
 } from "../gameTypes"
 
 const checkResources = (resources: ResourceData[]): VorgType | null => {
@@ -53,7 +54,7 @@ const checkForSpawns = assign<GameContext, GameEvent>({
       },
       {}
     )
-    const spawns = Object.values(tiles)
+    const spawns: VorgData[] = Object.values(tiles)
       .filter((resources) => resources.length >= 2)
       .map((resources) => {
         const parentTile = context.tiles.find(

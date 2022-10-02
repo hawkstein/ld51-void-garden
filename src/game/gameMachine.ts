@@ -1,6 +1,7 @@
 import { createMachine, assign } from "xstate"
 import { uniqueId } from "xstate/lib/utils"
 import checkForSpawns from "./actions/checkForSpawns"
+import damageVorgs from "./actions/damageVorgs"
 import handleResourceDrop from "./actions/handleResourceDrop"
 import handleResourceTileDrop from "./actions/handleResourceTileDrop"
 import reduceSeedStores from "./actions/reduceSeedStores"
@@ -40,6 +41,7 @@ const gameMachine = createMachine(
     initial: "init",
     states: {
       init: {
+        // "init" is here to prevent some strange multiple (10x) calling of the spawnSeed action on initial render
         after: { 100: "ready" },
       },
       ready: {
@@ -58,7 +60,7 @@ const gameMachine = createMachine(
             always: { target: "handleTick" },
           },
           handleTick: {
-            after: { 10000: "resolveTick" },
+            after: { 10000: "resolveDamage" },
             on: {
               RESOURCE_DROP: {
                 internal: true,
@@ -70,16 +72,27 @@ const gameMachine = createMachine(
               },
             },
           },
+          resolveDamage: {
+            entry: ["damageVorgs"],
+            always: { target: "spawnCheck" },
+          },
+          spawnCheck: {
+            entry: ["checkForSpawns"],
+            always: { target: "resolveTick" },
+          },
           resolveTick: {
-            entry: ["removeVorgs", "checkForSpawns", "removeResources"],
+            entry: ["removeVorgs", "removeResources"],
             after: { 1000: "setupTick" },
           },
         },
       },
+      gameover: {},
+      success: {},
     },
   },
   {
     actions: {
+      damageVorgs,
       spawnSeed,
       spawnResources,
       reduceSeedStores,
