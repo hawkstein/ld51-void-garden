@@ -58,6 +58,7 @@ export default function Board({ paused = false }: BoardProps) {
   const resources = state.context.resources
   const tileResources = state.context.tileResources
   const isGameOver = state.matches("gameover")
+  const isSuccess = state.matches("success")
   const displayGuide = state.matches("play.guide")
   return (
     <>
@@ -109,6 +110,11 @@ export default function Board({ paused = false }: BoardProps) {
       {isGameOver ? (
         <>
           <h2>Game over man! No vacuum organisms left!</h2>
+        </>
+      ) : isSuccess ? (
+        <>
+          Congrats! You made lasted 24 turns and got a score of{" "}
+          {state.context.score}!
         </>
       ) : (
         <>
