@@ -20,6 +20,13 @@ const theme = {
         },
       },
     },
+    Popover: {
+      styles: {
+        dropdown: {
+          backgroundColor: "#000",
+        },
+      },
+    },
   },
 }
 
