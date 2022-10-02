@@ -16,8 +16,19 @@ const hasCorrectResources = (
   resources: ResourceData[]
 ) => {
   const requiredResources = getRequiresByType(vorgType)
-  return resources.some((resource) =>
-    requiredResources.some((required) => required.type === resource.type)
+  const countOfResources = resources.reduce<Record<ResourceType, number>>(
+    (totals, resource) => {
+      return { ...totals, [resource.type]: (totals[resource.type] += 1) }
+    },
+    {
+      [ResourceType.Compound]: 0,
+      [ResourceType.Energy]: 0,
+      [ResourceType.Exotic]: 0,
+      [ResourceType.Seed]: 0,
+    }
+  )
+  return requiredResources.every(
+    (required) => countOfResources[required.type] >= required.amount
   )
 }
 
