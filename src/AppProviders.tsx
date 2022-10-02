@@ -1,9 +1,6 @@
 import * as Sentry from "@sentry/react"
 import React, { ReactNode } from "react"
 import { MantineProvider } from "@mantine/core"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-
-const queryClient = new QueryClient()
 
 const theme = {
   components: {
@@ -36,11 +33,9 @@ export default function AppProviders({ children }: { children: ReactNode }) {
         </p>
       }
     >
-      <QueryClientProvider client={queryClient}>
-        <MantineProvider theme={theme} withNormalizeCSS withCSSVariables>
-          {children}
-        </MantineProvider>
-      </QueryClientProvider>
+      <MantineProvider theme={theme} withNormalizeCSS withCSSVariables>
+        {children}
+      </MantineProvider>
     </Sentry.ErrorBoundary>
   )
 }
