@@ -10,8 +10,10 @@ export default function GameOptions() {
   const setBgMusicVolume = useOptions((store) => store.setBgMusicVolume)
   const sfxVolume = useOptions((store) => store.sfxVolume)
   const setSfxVolume = useOptions((store) => store.setSfxVolume)
-  const preloadImages = useOptions((store) => store.preloadImages)
-  const setPreloadImages = useOptions((store) => store.setPreloadImages)
+  // const preloadImages = useOptions((store) => store.preloadImages)
+  // const setPreloadImages = useOptions((store) => store.setPreloadImages)
+  const tutorial = useOptions((store) => store.tutorial)
+  const setTutorial = useOptions((store) => store.setTutorial)
   return (
     <>
       <h2>Audio Options</h2>
@@ -63,12 +65,20 @@ export default function GameOptions() {
       <h2>Config</h2>
       <div style={{ marginBottom: "20px" }}>
         <Switch
+          label="Tutorial Guide"
+          size="lg"
+          checked={tutorial}
+          onChange={(event) => setTutorial(event.currentTarget.checked)}
+        />
+      </div>
+      {/* <div style={{ marginBottom: "20px" }}>
+        <Switch
           label="Preload images"
           size="lg"
           checked={preloadImages}
           onChange={(event) => setPreloadImages(event.currentTarget.checked)}
         />
-      </div>
+      </div> */}
     </>
   )
 }

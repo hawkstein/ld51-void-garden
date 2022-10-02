@@ -12,6 +12,8 @@ type Options = {
   setPreloadImages: (value: boolean) => void
   setSfxVolume: (volume: number) => void
   setBgMusicVolume: (volume: number) => void
+  tutorial: boolean
+  setTutorial: (value: boolean) => void
 }
 
 const useOptions = create<Options>()(
@@ -36,6 +38,8 @@ const useOptions = create<Options>()(
     preloadImages: true,
     setPreloadImages: (preloadImages) =>
       set((state) => ({ ...state, preloadImages })),
+    tutorial: true,
+    setTutorial: (tutorial) => set((state) => ({ ...state, tutorial })),
   }))
 )
 

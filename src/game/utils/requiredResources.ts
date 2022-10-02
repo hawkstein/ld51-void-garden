@@ -15,6 +15,7 @@ const requiresMappedToType: Record<
   [VorgType.Flower]: [
     { type: ResourceType.Exotic, amount: 1 },
     { type: ResourceType.Energy, amount: 1 },
+    { type: ResourceType.Compound, amount: 1 },
   ],
 }
 

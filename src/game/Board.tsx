@@ -3,6 +3,7 @@ import { useMachine } from "@xstate/react"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useRef } from "react"
 import { SimulatedClock } from "xstate/lib/SimulatedClock"
+import useOptions from "../options/useOptions"
 import CountdownBar from "./CountdownBar"
 import gameMachine from "./gameMachine"
 import Resource from "./Resource"
@@ -17,7 +18,14 @@ type BoardProps = {
 const simulatedClock = new SimulatedClock()
 
 export default function Board({ paused = false }: BoardProps) {
-  const [state, send] = useMachine(gameMachine, { clock: simulatedClock })
+  const tutorial = useOptions((store) => store.tutorial)
+  const [state, send] = useMachine(gameMachine, {
+    clock: simulatedClock,
+    context: {
+      ...gameMachine.context,
+      guides: tutorial ? ["intro", "collector", "extractor", "end"] : [],
+    },
+  })
   useEffect(() => {
     let id: number
     if (!paused) {
