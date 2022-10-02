@@ -27,6 +27,16 @@ const theme = {
         },
       },
     },
+    Switch: {
+      styles: {
+        "input:checked + root": {
+          backgroundColor: "#e93cac",
+        },
+        track: {
+          backgroundColor: "#000",
+        },
+      },
+    },
   },
 }
 

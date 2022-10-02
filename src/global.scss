@@ -37,3 +37,13 @@ h6 {
   font-family: "Zen Dots", cursive;
   color: #e93cac;
 }
+
+.mantine-Switch-track {
+  background-color: #000 !important;
+  border-color: #fff !important;
+}
+
+input:checked + .mantine-Switch-track {
+  background-color: #e93cac !important;
+  border-color: #e93cac !important;
+}

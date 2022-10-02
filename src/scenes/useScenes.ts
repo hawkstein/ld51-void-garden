@@ -14,7 +14,7 @@ export enum Scenes {
 
 const useScenes = create<SceneStore>()(
   devtools((set) => ({
-    current: Scenes.Game,
+    current: Scenes.Menu,
     set: (target) => set(() => ({ current: target })),
   }))
 )
