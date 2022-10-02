@@ -53,15 +53,7 @@ export default function Board({ paused = false }: BoardProps) {
   return (
     <>
       <div>{state.toStrings().join(", ")}</div>
-      {displayGuide && (
-        <Overlay
-          opacity={0}
-          color="#000"
-          onClick={() => {
-            send("GUIDE_CLOSED")
-          }}
-        />
-      )}
+      {displayGuide && <Overlay opacity={0} color="#000" />}
       <div
         ref={boardContainer}
         style={{ width: "700px", height: "600px", position: "absolute" }}
@@ -82,15 +74,16 @@ export default function Board({ paused = false }: BoardProps) {
                 left: state.context.guideTarget.x,
                 top: state.context.guideTarget.y,
               }}
-              onClick={() => {
-                send("GUIDE_CLOSED")
-              }}
             />
           </Popover.Target>
-          <Popover.Dropdown>
+          <Popover.Dropdown
+            onClick={() => {
+              send("GUIDE_CLOSED")
+            }}
+          >
             <>
               <p>{getGuideCopy(state.context.currentGuide)}</p>
-              <p>Click anywhere to close.</p>
+              <p>Click this guide to close.</p>
             </>
           </Popover.Dropdown>
         </Popover>
