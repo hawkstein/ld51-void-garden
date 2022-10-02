@@ -1,4 +1,4 @@
-import { createMachine, assign } from "xstate"
+import { createMachine, assign, actions } from "xstate"
 import { uniqueId } from "xstate/lib/utils"
 import checkForSpawns from "./actions/checkForSpawns"
 import damageVorgs from "./actions/damageVorgs"
@@ -8,9 +8,11 @@ import reduceSeedStores from "./actions/reduceSeedStores"
 import removeGuideId from "./actions/removeGuideId"
 import removeResources from "./actions/removeResources"
 import removeVorgs from "./actions/removeVorgs"
+import resetCountdown from "./actions/resetCountdown"
 import setupGuide from "./actions/setupGuide"
 import spawnResources from "./actions/spawnResources"
 import spawnSeed from "./actions/spawnSeed"
+import updateCountdown from "./actions/updateCountdown"
 import { GameContext, GameEvent, TileData } from "./gameTypes"
 
 const tiles: TileData[] = [
@@ -39,6 +41,7 @@ const gameMachine = createMachine(
       guides: ["intro", "collector", "extractor", "end"],
       guideTarget: { x: 0, y: 0, withArrow: true },
       currentGuide: null,
+      countdown: 1,
     } as GameContext,
     schema: {
       events: {} as GameEvent,
@@ -57,7 +60,7 @@ const gameMachine = createMachine(
         initial: "setupTick",
         states: {
           setupTick: {
-            entry: ["spawnResources"],
+            entry: ["spawnResources", "resetCountdown"],
             after: { 1000: "tidyUp" },
           },
           tidyUp: {
@@ -84,6 +87,13 @@ const gameMachine = createMachine(
               RESOURCE_TILE_DROP: {
                 internal: true,
                 actions: ["handleResourceTileDrop"],
+              },
+            },
+            initial: "tick",
+            states: {
+              tick: {
+                entry: "updateCountdown",
+                after: { 999: "tick" },
               },
             },
           },
@@ -133,6 +143,8 @@ const gameMachine = createMachine(
       checkForSpawns,
       removeResources,
       removeGuideId,
+      updateCountdown,
+      resetCountdown,
       handleResourceDrop,
       handleResourceTileDrop,
       removeVorgs,

@@ -46,6 +46,7 @@ export type GameContext = {
   guides: GuideId[]
   guideTarget: { x: number; y: number; withArrow: boolean }
   currentGuide: GuideId | null
+  countdown: number
 }
 
 export type GameEvent =

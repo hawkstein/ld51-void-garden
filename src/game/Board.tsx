@@ -3,6 +3,7 @@ import { useMachine } from "@xstate/react"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useRef } from "react"
 import { SimulatedClock } from "xstate/lib/SimulatedClock"
+import CountdownBar from "./CountdownBar"
 import gameMachine from "./gameMachine"
 import Resource from "./Resource"
 import Tile from "./Tile"
@@ -100,51 +101,54 @@ export default function Board({ paused = false }: BoardProps) {
           <h2>Game over man! No vacuum organims left!</h2>
         </>
       ) : (
-        <div
-          ref={boardContainer}
-          style={{ width: "700px", height: "600px", position: "relative" }}
-        >
-          {tiles.map(({ id, x, y }) => (
-            <Tile key={id} x={x} y={y} label={id} />
-          ))}
-          {vorgs.map(({ id, x, y, type, health }) => {
-            return (
-              <Vorg
-                key={id}
-                x={x}
-                y={y}
-                label={type}
-                type={type}
-                health={health}
-                debug
-              />
-            )
-          })}
-          <AnimatePresence>
-            {resources.map(({ x, y, id, type }) => (
-              <Resource
-                key={id}
-                id={id}
-                type={type}
-                x={x}
-                y={y}
-                onDragEnd={handleDragEnd}
-              />
+        <>
+          <CountdownBar scaleX={state.context.countdown} />
+          <div
+            ref={boardContainer}
+            style={{ width: "700px", height: "600px", position: "relative" }}
+          >
+            {tiles.map(({ id, x, y }) => (
+              <Tile key={id} x={x} y={y} label={id} />
             ))}
-          </AnimatePresence>
-          <AnimatePresence>
-            {tileResources.map(({ x, y, id, type }) => (
-              <Resource
-                key={id}
-                id={id}
-                type={type}
-                x={x}
-                y={y}
-                onDragEnd={handleTileDragEnd}
-              />
-            ))}
-          </AnimatePresence>
-        </div>
+            {vorgs.map(({ id, x, y, type, health }) => {
+              return (
+                <Vorg
+                  key={id}
+                  x={x}
+                  y={y}
+                  label={type}
+                  type={type}
+                  health={health}
+                  debug
+                />
+              )
+            })}
+            <AnimatePresence>
+              {resources.map(({ x, y, id, type }) => (
+                <Resource
+                  key={id}
+                  id={id}
+                  type={type}
+                  x={x}
+                  y={y}
+                  onDragEnd={handleDragEnd}
+                />
+              ))}
+            </AnimatePresence>
+            <AnimatePresence>
+              {tileResources.map(({ x, y, id, type }) => (
+                <Resource
+                  key={id}
+                  id={id}
+                  type={type}
+                  x={x}
+                  y={y}
+                  onDragEnd={handleTileDragEnd}
+                />
+              ))}
+            </AnimatePresence>
+          </div>
+        </>
       )}
     </>
   )
