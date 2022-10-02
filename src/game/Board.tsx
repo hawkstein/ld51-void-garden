@@ -55,8 +55,10 @@ export default function Board({ paused = false }: BoardProps) {
         {tiles.map(({ id, x, y }) => (
           <Tile key={id} x={x} y={y} label={id} />
         ))}
-        {vorgs.map(({ id, x, y, type }) => {
-          return <Vorg key={id} x={x} y={y} label={type} />
+        {vorgs.map(({ id, x, y, type, health }) => {
+          return (
+            <Vorg key={id} x={x} y={y} label={type} health={health} debug />
+          )
         })}
         <AnimatePresence>
           {resources.map(({ x, y, id, type }) => (

@@ -1,21 +1,28 @@
 import { AnimatePresence, motion } from "framer-motion"
 import styles from "./Vorg.module.scss"
 
+type VorgProps = {
+  x: number
+  y: number
+  label: string
+  health: number
+  debug?: boolean
+}
+
 export default function Vorg({
   x,
   y,
   label,
-}: {
-  x: number
-  y: number
-  label: string
-}) {
+  health,
+  debug = false,
+}: VorgProps) {
+  const damageStyle = health <= 1 ? styles.damaged : ""
   return (
     <div
-      className={styles.background}
+      className={`${styles.background} ${damageStyle}`}
       style={{ top: `${y}px`, left: `${x}px` }}
     >
-      <span className={styles.label}>{label}</span>
+      {debug && <span className={styles.label}>{label}</span>}
     </div>
   )
 }
