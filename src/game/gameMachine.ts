@@ -14,6 +14,8 @@ import spawnResources from "./actions/spawnResources"
 import spawnSeed from "./actions/spawnSeed"
 import updateCountdown from "./actions/updateCountdown"
 import { GameContext, GameEvent, TileData } from "./gameTypes"
+import updateTurnCount from "./actions/updateTurnCount"
+import { MAX_TURNS } from "./constants"
 
 const tiles: TileData[] = [
   { id: uniqueId(), x: 20, y: 100 },
@@ -42,6 +44,8 @@ const gameMachine = createMachine(
       guideTarget: { x: 0, y: 0, withArrow: true },
       currentGuide: null,
       countdown: 1,
+      turn: 1,
+      score: 0,
     } as GameContext,
     schema: {
       events: {} as GameEvent,
@@ -106,7 +110,7 @@ const gameMachine = createMachine(
             always: { target: "resolveTick" },
           },
           resolveTick: {
-            entry: ["removeVorgs", "removeResources"],
+            entry: ["removeVorgs", "removeResources", "updateTurnCount"],
             after: {
               1000: [
                 { target: "finished", cond: "playerHasWonOrLost" },
@@ -148,10 +152,12 @@ const gameMachine = createMachine(
       handleResourceDrop,
       handleResourceTileDrop,
       removeVorgs,
+      updateTurnCount,
     },
     guards: {
-      playerHasWonOrLost: (context) => context.vorgs.length === 0,
-      playerHasWon: (context) => false,
+      playerHasWonOrLost: (context) =>
+        context.vorgs.length === 0 || context.turn >= MAX_TURNS,
+      playerHasWon: (context) => context.turn >= MAX_TURNS,
       playerHasLost: (context) => context.vorgs.length === 0,
       hasGuides: (context) => context.guides.length > 0,
     },

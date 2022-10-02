@@ -50,6 +50,8 @@ export type GameContext = {
   guideTarget: { x: number; y: number; withArrow: boolean }
   currentGuide: GuideId | null
   countdown: number
+  turn: number
+  score: number
 }
 
 export type GameEvent =

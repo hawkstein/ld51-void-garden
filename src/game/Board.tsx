@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion"
 import { useEffect, useRef } from "react"
 import { SimulatedClock } from "xstate/lib/SimulatedClock"
 import useOptions from "../options/useOptions"
+import { MAX_TURNS } from "./constants"
 import CountdownBar from "./CountdownBar"
 import gameMachine from "./gameMachine"
 import Resource from "./Resource"
@@ -60,7 +61,10 @@ export default function Board({ paused = false }: BoardProps) {
   const displayGuide = state.matches("play.guide")
   return (
     <>
-      <div>{state.toStrings().join(", ")}</div>
+      <div>
+        {state.toStrings().join(", ")} Score:{state.context.score} Turn:
+        {state.context.turn}/{MAX_TURNS}
+      </div>
       {displayGuide && <Overlay opacity={0} color="#000" />}
       <div
         ref={boardContainer}
@@ -99,7 +103,7 @@ export default function Board({ paused = false }: BoardProps) {
 
       {isGameOver ? (
         <>
-          <h2>Game over man! No vacuum organims left!</h2>
+          <h2>Game over man! No vacuum organisms left!</h2>
         </>
       ) : (
         <>
