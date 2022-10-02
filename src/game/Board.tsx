@@ -110,14 +110,37 @@ export default function Board({ paused = false }: BoardProps) {
       </div>
 
       {isGameOver ? (
-        <>
-          <h2>Game over man! No vacuum organisms left!</h2>
-        </>
+        <div
+          style={{
+            width: "100%",
+            height: "70%",
+            display: "grid",
+            placeContent: "center",
+            textAlign: "center",
+          }}
+        >
+          <h2>Game over! No vacuum organisms left!</h2>
+          <h2 style={{ color: "#fff" }}>
+            Your final score was {state.context.score}
+          </h2>
+          <h2>Thanks for playing!</h2>
+        </div>
       ) : isSuccess ? (
-        <>
-          Congrats! You made lasted 24 turns and got a score of{" "}
-          {state.context.score}!
-        </>
+        <div
+          style={{
+            width: "100%",
+            height: "70%",
+            display: "grid",
+            placeContent: "center",
+            textAlign: "center",
+          }}
+        >
+          <h2>Congrats! You lasted the full 24 turns!</h2>
+          <h2 style={{ color: "#fff" }}>
+            Your final score was {state.context.score}!
+          </h2>
+          <h2>Thanks for playing!</h2>
+        </div>
       ) : (
         <>
           <CountdownBar scaleX={state.context.countdown} />

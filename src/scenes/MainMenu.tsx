@@ -40,11 +40,20 @@ export default function MainMenu() {
           </span>
         </div>
         <div style={{ flex: "1", fontSize: "1.2rem" }}>
-          <p>Theme: Every 10 seconds</p>
+          <p>Ludum Dare 51 Theme: Every 10 seconds</p>
           <p>
             Void Garden is a resource management game about cultivating a garden
-            of vorgs, vacuum organisms or robotic plants bred to survive on
-            asteroids.
+            of vacuum organisms or vorgs, creatures that have been engineered to
+            survive in deep space.
+          </p>
+          <p>
+            The game is based around dragging various resources from one
+            location to another, building different types of organism based on
+            those resources dropped, then repeating with their new resources.
+          </p>
+          <p>
+            The goal of the game is to get a high score within 24 turns, you can
+            play it safe but you won't score very well.
           </p>
         </div>
       </Stack>
