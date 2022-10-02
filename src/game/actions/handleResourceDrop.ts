@@ -1,19 +1,26 @@
 import { assign } from "@xstate/immer"
 import isColliding from "../../utils/circleCollision"
-import { GameContext, GameEvent } from "../gameTypes"
+import { FRUIT_SPAWN_POINTS } from "../constants"
+import { GameContext, GameEvent, ResourceType } from "../gameTypes"
 
 const handleResourceDrop = assign<GameContext, GameEvent>((context, event) => {
+  const collidingResource = context.resources.findIndex(
+    (resource) => resource.id === event.id
+  )
+  const resource = context.resources[collidingResource]
+  if (resource?.type === ResourceType.Seed && (event.y < 0 || event.y > 700)) {
+    console.log("Flung!")
+    context.score += FRUIT_SPAWN_POINTS
+  }
   const collision = context.tiles.findIndex((tile) =>
     isColliding(
       { x: tile.x, y: tile.y, radius: 50 },
       { x: event.x, y: event.y, radius: 10 }
     )
   )
-  if (collision >= 0) {
+  if (collision >= 0 && resource?.type !== ResourceType.Seed) {
     const duplicateResources = [...context.resources]
-    const collidingResource = context.resources.findIndex(
-      (resource) => resource.id === event.id
-    )
+
     const removed = duplicateResources.splice(collidingResource, 1).pop()
     const updatedTile = context.tiles[collision]
     const otherResourcesOnThatTile = context.tileResources.filter(

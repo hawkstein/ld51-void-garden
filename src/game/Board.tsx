@@ -61,10 +61,15 @@ export default function Board({ paused = false }: BoardProps) {
   const displayGuide = state.matches("play.guide")
   return (
     <>
-      <div>
-        {state.toStrings().join(", ")} Score:{state.context.score} Turn:
-        {state.context.turn}/{MAX_TURNS}
-      </div>
+      <p>
+        <strong style={{ display: "flex", justifyContent: "space-between" }}>
+          <span>Score:{state.context.score}</span>
+          <span>
+            Turn:
+            {state.context.turn}/{MAX_TURNS}
+          </span>
+        </strong>
+      </p>
       {displayGuide && <Overlay opacity={0} color="#000" />}
       <div
         ref={boardContainer}
