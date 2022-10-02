@@ -63,9 +63,13 @@ const idMappedToCopy: Record<GuideId, ReactNode> = {
       </p>
       <p>
         These require 1 <Compound width="20px" />, 1 <Energy width="20px" /> and
-        1 <Exotic width="20px" /> to both build and maintain. The fruit they
-        produce scores a lot of points when you throw them off into space
-        (off-screen).
+        1 <Exotic width="20px" /> to both build and maintain. The fruit{" "}
+        <Fruit width="20px" /> they produce scores a lot of points when you
+        throw them off into space (off-screen).
+      </p>
+      <p>
+        You score some points just for generating each <Exotic width="20px" />{" "}
+        or <Fruit width="20px" />
       </p>
     </>
   ),
