@@ -48,6 +48,8 @@ export default function Resource({ id, type, x, y, onDragEnd }: ResourceProps) {
     <motion.div
       ref={container}
       drag
+      initial={{ scale: 0.5, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
       whileDrag={{ scale: 1.4 }}
       dragTransition={{ restDelta: 5 }}
       onDragEnd={(e) => {
