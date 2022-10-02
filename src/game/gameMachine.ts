@@ -1,6 +1,6 @@
 import { createMachine } from "xstate"
 import { uniqueId } from "xstate/lib/utils"
-import checkForSpawns from "./actions/checkForSpawns"
+import spawnVorgs from "./actions/spawnVorgs"
 import damageVorgs from "./actions/damageVorgs"
 import handleResourceDrop from "./actions/handleResourceDrop"
 import handleResourceTileDrop from "./actions/handleResourceTileDrop"
@@ -102,7 +102,7 @@ const gameMachine = createMachine(
             always: { target: "spawnCheck" },
           },
           spawnCheck: {
-            entry: ["checkForSpawns"],
+            entry: ["spawnVorgs"],
             always: { target: "resolveTick" },
           },
           resolveTick: {
@@ -140,7 +140,7 @@ const gameMachine = createMachine(
       spawnSeed,
       spawnResources,
       reduceSeedStores,
-      checkForSpawns,
+      spawnVorgs,
       removeResources,
       removeGuideId,
       updateCountdown,
