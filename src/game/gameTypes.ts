@@ -1,3 +1,5 @@
+import { GuideId } from "./utils/getGuideCopy"
+
 export type TileData = { id: string; x: number; y: number; vorgId?: string }
 
 export enum VorgType {
@@ -41,6 +43,9 @@ export type GameContext = {
   vorgs: VorgData[]
   resources: ResourceData[]
   tileResources: ResourceData[]
+  guides: GuideId[]
+  guideTarget: { x: number; y: number; withArrow: boolean }
+  currentGuide: GuideId | null
 }
 
 export type GameEvent =
@@ -50,4 +55,7 @@ export type GameEvent =
       x: number
       y: number
       id: string
+    }
+  | {
+      type: "GUIDE_CLOSED"
     }

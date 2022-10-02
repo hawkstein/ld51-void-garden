@@ -5,8 +5,10 @@ import damageVorgs from "./actions/damageVorgs"
 import handleResourceDrop from "./actions/handleResourceDrop"
 import handleResourceTileDrop from "./actions/handleResourceTileDrop"
 import reduceSeedStores from "./actions/reduceSeedStores"
+import removeGuideId from "./actions/removeGuideId"
 import removeResources from "./actions/removeResources"
 import removeVorgs from "./actions/removeVorgs"
+import setupGuide from "./actions/setupGuide"
 import spawnResources from "./actions/spawnResources"
 import spawnSeed from "./actions/spawnSeed"
 import { GameContext, GameEvent, TileData } from "./gameTypes"
@@ -34,6 +36,9 @@ const gameMachine = createMachine(
       vorgs: [],
       resources: [],
       tileResources: [],
+      guides: ["intro", "collector", "extractor", "end"],
+      guideTarget: { x: 0, y: 0, withArrow: true },
+      currentGuide: null,
     } as GameContext,
     schema: {
       events: {} as GameEvent,
@@ -57,7 +62,17 @@ const gameMachine = createMachine(
           },
           tidyUp: {
             entry: ["reduceSeedStores"],
-            always: { target: "handleTick" },
+            always: [
+              { target: "guide", cond: "hasGuides" },
+              { target: "handleTick" },
+            ],
+          },
+          guide: {
+            entry: ["setupGuide"],
+            on: {
+              GUIDE_CLOSED: "handleTick",
+            },
+            exit: ["removeGuideId"],
           },
           handleTick: {
             after: { 10000: "resolveDamage" },
@@ -111,11 +126,13 @@ const gameMachine = createMachine(
   {
     actions: {
       damageVorgs,
+      setupGuide,
       spawnSeed,
       spawnResources,
       reduceSeedStores,
       checkForSpawns,
       removeResources,
+      removeGuideId,
       handleResourceDrop,
       handleResourceTileDrop,
       removeVorgs,
@@ -124,6 +141,7 @@ const gameMachine = createMachine(
       playerHasWonOrLost: (context) => context.vorgs.length === 0,
       playerHasWon: (context) => false,
       playerHasLost: (context) => context.vorgs.length === 0,
+      hasGuides: (context) => context.guides.length > 0,
     },
   }
 )

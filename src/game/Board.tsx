@@ -1,3 +1,4 @@
+import { Overlay, Popover } from "@mantine/core"
 import { useMachine } from "@xstate/react"
 import { AnimatePresence } from "framer-motion"
 import { useEffect, useRef } from "react"
@@ -5,6 +6,7 @@ import { SimulatedClock } from "xstate/lib/SimulatedClock"
 import gameMachine from "./gameMachine"
 import Resource from "./Resource"
 import Tile from "./Tile"
+import getGuideCopy from "./utils/getGuideCopy"
 import Vorg from "./Vorg"
 
 type BoardProps = {
@@ -46,9 +48,53 @@ export default function Board({ paused = false }: BoardProps) {
   const resources = state.context.resources
   const tileResources = state.context.tileResources
   const isGameOver = state.matches("gameover")
+  const displayGuide = state.matches("play.guide")
   return (
     <>
       <div>{state.toStrings().join(", ")}</div>
+      {displayGuide && (
+        <Overlay
+          opacity={0}
+          color="#000"
+          onClick={() => {
+            send("GUIDE_CLOSED")
+          }}
+        />
+      )}
+      <div
+        ref={boardContainer}
+        style={{ width: "700px", height: "600px", position: "absolute" }}
+      >
+        <Popover
+          width={400}
+          position="bottom"
+          withArrow={state.context.guideTarget.withArrow}
+          shadow="md"
+          opened={displayGuide}
+        >
+          <Popover.Target>
+            <div
+              style={{
+                position: "absolute",
+                width: "100px",
+                height: "100px",
+                left: state.context.guideTarget.x,
+                top: state.context.guideTarget.y,
+              }}
+              onClick={() => {
+                send("GUIDE_CLOSED")
+              }}
+            />
+          </Popover.Target>
+          <Popover.Dropdown>
+            <>
+              <p>{getGuideCopy(state.context.currentGuide)}</p>
+              <p>Click anywhere to close.</p>
+            </>
+          </Popover.Dropdown>
+        </Popover>
+      </div>
+
       {isGameOver ? (
         <>
           <h2>Game over man! No vacuum organims left!</h2>
