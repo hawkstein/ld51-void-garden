@@ -15,6 +15,8 @@ const styleMappedToType: Record<VorgType, string> = {
   [VorgType.Seed]: styles.seed,
   [VorgType.Collector]: styles.collector,
   [VorgType.Extractor]: styles.extractor,
+  [VorgType.Colony]: styles.colony,
+  [VorgType.Flower]: styles.flower,
 }
 
 const styleFromType = (type: VorgType) => styleMappedToType[type]

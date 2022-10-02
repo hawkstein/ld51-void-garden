@@ -14,6 +14,7 @@ const mappedStyles = {
   [ResourceType.Energy]: styles.energy,
   [ResourceType.Compound]: styles.compound,
   [ResourceType.Exotic]: styles.exotic,
+  [ResourceType.Seed]: styles.exotic,
 }
 
 const getStyle = (type: ResourceType) => mappedStyles[type]
@@ -22,6 +23,7 @@ const mappedLabels = {
   [ResourceType.Energy]: "E!",
   [ResourceType.Compound]: "C!",
   [ResourceType.Exotic]: "X!",
+  [ResourceType.Seed]: "S!",
 }
 
 const getLabel = (type: ResourceType) => mappedLabels[type]

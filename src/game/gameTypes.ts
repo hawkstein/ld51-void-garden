@@ -6,6 +6,8 @@ export enum VorgType {
   Seed = "Seed",
   Collector = "Collector",
   Extractor = "Extractor",
+  Colony = "Colony",
+  Flower = "Flower",
 }
 
 export interface ResourceSpawn {
@@ -28,6 +30,7 @@ export enum ResourceType {
   Energy = "Energy",
   Compound = "Compound",
   Exotic = "Exotic",
+  Seed = "Seed",
 }
 
 export type ResourceData = {
@@ -59,4 +62,7 @@ export type GameEvent =
     }
   | {
       type: "GUIDE_CLOSED"
+      x: number
+      y: number
+      id: string
     }

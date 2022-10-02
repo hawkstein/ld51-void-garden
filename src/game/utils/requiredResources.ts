@@ -8,6 +8,14 @@ const requiresMappedToType: Record<
 > = {
   [VorgType.Collector]: [{ type: ResourceType.Compound, amount: 1 }],
   [VorgType.Extractor]: [{ type: ResourceType.Energy, amount: 1 }],
+  [VorgType.Colony]: [
+    { type: ResourceType.Energy, amount: 1 },
+    { type: ResourceType.Compound, amount: 1 },
+  ],
+  [VorgType.Flower]: [
+    { type: ResourceType.Exotic, amount: 1 },
+    { type: ResourceType.Energy, amount: 1 },
+  ],
 }
 
 export const getRequiresByType = (type: ConstructedVorgType) =>
