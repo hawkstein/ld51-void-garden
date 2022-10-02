@@ -1,8 +1,14 @@
+import { ReactNode } from "react"
+
 export type GuideId = "intro" | "collector" | "extractor" | "end"
 
-const idMappedToCopy: Record<GuideId, string> = {
-  intro:
-    "This is your seed vacuum organism. It will generate Compound resources for a few rounds and then disappear. Drag two of them to another tile.",
+const idMappedToCopy: Record<GuideId, ReactNode> = {
+  intro: (
+    <span>
+      This is your seed vacuum organism. It will generate Compound resources for
+      a few rounds and then disappear. Drag two of them to another tile.
+    </span>
+  ),
   collector:
     "A solar collector gathers energy every ten seconds and requires 1 compound resource. Without a Compound, tt will become damaged first and then be destroyed.",
   extractor:

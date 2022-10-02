@@ -1,14 +1,16 @@
 import styles from "./Tile.module.scss"
 
-type TileProps = { x: number; y: number; label: string }
+type TileProps = { x: number; y: number; label: string; debug?: boolean }
 
-export default function Tile({ x, y, label }: TileProps) {
+export default function Tile({ x, y, label, debug = false }: TileProps) {
   return (
     <div
       className={styles.background}
       style={{ top: `${y}px`, left: `${x}px` }}
     >
-      <span className={styles.label}>Tile {label}</span>
+      <div className={styles.inner}>
+        {debug && <span className={styles.label}>Tile {label}</span>}
+      </div>
     </div>
   )
 }

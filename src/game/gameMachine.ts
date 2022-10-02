@@ -17,17 +17,19 @@ import { GameContext, GameEvent, TileData } from "./gameTypes"
 import updateTurnCount from "./actions/updateTurnCount"
 import { MAX_TURNS } from "./constants"
 
+const generateRow = (length: number, startX: number, gap: number, y: number) =>
+  Array.from({ length }).map((_, index) => ({
+    id: uniqueId(),
+    x: startX + index * gap,
+    y,
+  }))
+
 const tiles: TileData[] = [
-  { id: uniqueId(), x: 20, y: 100 },
-  { id: uniqueId(), x: 220, y: 100 },
-  { id: uniqueId(), x: 420, y: 100 },
-  { id: uniqueId(), x: 620, y: 100 },
-  { id: uniqueId(), x: 120, y: 200 },
-  { id: uniqueId(), x: 320, y: 200 },
-  { id: uniqueId(), x: 520, y: 200 },
-  { id: uniqueId(), x: 220, y: 300 },
-  { id: uniqueId(), x: 420, y: 300 },
-  { id: uniqueId(), x: 320, y: 400 },
+  ...generateRow(5, 60, 180, 100),
+  ...generateRow(4, 160, 180, 220),
+  ...generateRow(3, 240, 180, 340),
+  ...generateRow(2, 340, 180, 460),
+  { id: uniqueId(), x: 430, y: 580 },
 ]
 
 const gameMachine = createMachine(

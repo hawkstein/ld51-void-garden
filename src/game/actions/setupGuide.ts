@@ -10,7 +10,7 @@ const setupGuide = assign<GameContext, GameEvent>((context, event) => {
     const seed = context.vorgs.find((vorg) => vorg.type === VorgType.Seed)
     if (seed) {
       x = seed.x
-      y = seed.y
+      y = seed.y + 80
     }
   } else if (nextGuide === "collector") {
     const collector = context.vorgs.find(
@@ -18,7 +18,7 @@ const setupGuide = assign<GameContext, GameEvent>((context, event) => {
     )
     if (collector) {
       x = collector.x
-      y = collector.y
+      y = collector.y + 80
     } else {
       withArrow = false
       x = 700 / 2
@@ -30,7 +30,7 @@ const setupGuide = assign<GameContext, GameEvent>((context, event) => {
     )
     if (extractor) {
       x = extractor.x
-      y = extractor.y
+      y = extractor.y + 80
     } else {
       withArrow = false
       x = 700 / 2

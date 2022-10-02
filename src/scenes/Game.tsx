@@ -13,18 +13,20 @@ export default function Game() {
       <Grid align="center" sx={{ marginTop: "auto" }}>
         <Grid.Col span="auto">
           <Button
+            sx={{ width: "100%" }}
             onClick={() => {
               gotoScene(Scenes.Menu)
             }}
           >
-            Back to main menu
+            Back to menu
           </Button>
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={6} sx={{ padding: "20px" }}>
           <Title />
         </Grid.Col>
         <Grid.Col span="auto">
           <Button
+            sx={{ width: "100%" }}
             onClick={() => {
               setPaused((previous) => !previous)
             }}

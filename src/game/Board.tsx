@@ -135,7 +135,6 @@ export default function Board({ paused = false }: BoardProps) {
                   label={type}
                   type={type}
                   health={health}
-                  debug
                 />
               )
             })}
