@@ -12,7 +12,14 @@
   padding: 0 32px 32px 32px;
 }
 
+.mainMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 0 20px;
+}
+
 .menuStack {
-  flex: 1;
-  margin-top: 16px;
+  max-width: 360px;
+  margin-top: 80px;
 }

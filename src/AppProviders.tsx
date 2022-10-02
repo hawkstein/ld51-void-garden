@@ -10,9 +10,17 @@ const theme = {
     Button: {
       defaultProps: {
         size: "lg",
-        variant: "gradient",
-        gradient: { from: "blue.7", to: "blue.5", deg: 35 },
         uppercase: true,
+      },
+      styles: {
+        root: {
+          color: "#e93cac",
+          backgroundColor: "#000",
+          border: "2px solid #e93cac",
+          "&:hover": {
+            backgroundColor: "#fff",
+          },
+        },
       },
     },
   },
@@ -29,12 +37,7 @@ export default function AppProviders({ children }: { children: ReactNode }) {
       }
     >
       <QueryClientProvider client={queryClient}>
-        <MantineProvider
-          theme={theme}
-          withGlobalStyles
-          withNormalizeCSS
-          withCSSVariables
-        >
+        <MantineProvider theme={theme} withNormalizeCSS withCSSVariables>
           {children}
         </MantineProvider>
       </QueryClientProvider>

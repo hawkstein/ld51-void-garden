@@ -19,13 +19,13 @@ body,
   flex-direction: column;
   min-height: 100%;
   margin: 0 auto;
-  background-color: var(--mantine-color-blue-1);
+  background-color: #000;
   position: relative;
 }
 
 p,
 li {
-  color: var(--mantine-color-gray-8);
+  color: var(--mantine-color-gray-4);
 }
 
 h1,
@@ -35,5 +35,5 @@ h4,
 h5,
 h6 {
   font-family: "Permanent Marker", cursive;
-  color: var(--mantine-color-gray-8);
+  color: var(--mantine-color-gray-2);
 }

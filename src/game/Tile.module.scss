@@ -2,13 +2,14 @@
   position: absolute;
   width: 100px;
   height: 100px;
-  border: 1px dashed black;
+  border: 1px dashed white;
   border-radius: 100%;
   display: grid;
   place-content: center;
 }
 
 .label {
+  color: white;
   pointer-events: none;
   user-select: none;
 }
