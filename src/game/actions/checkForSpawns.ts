@@ -1,4 +1,4 @@
-import { assign } from "xstate"
+import { assign } from "@xstate/immer"
 import { uniqueId } from "xstate/lib/utils"
 import {
   GameContext,
@@ -35,55 +35,51 @@ const matchResourcesToType = (vorgType: VorgType) => {
   return []
 }
 
-const checkForSpawns = assign<GameContext, GameEvent>({
-  vorgs: (context) => {
-    const tiles = context.tileResources.reduce<Record<string, ResourceData[]>>(
-      (collection, tile) => {
-        const parent = context.tiles.find(
-          (contextTile) => contextTile.id === tile.parent
-        )
-        if (tile.parent && !parent?.vorgId) {
-          return {
-            ...collection,
-            [tile.parent]: collection[tile.parent]
-              ? [...collection[tile.parent], tile]
-              : [tile],
-          }
-        }
-        return collection
-      },
-      {}
-    )
-    const spawns: VorgData[] = Object.values(tiles)
-      .filter((resources) => resources.length >= 2)
-      .map((resources) => {
-        const parentTile = context.tiles.find(
-          (tile) => resources[0].parent === tile.id
-        )
-        const type = checkResources(resources)
-        if (!type) {
-          throw new Error("No matching vorg for these resources!")
-        }
-        const resourceSpawns = matchResourcesToType(type)
-        const id = uniqueId()
-        if (parentTile) {
-          // Bad mutation
-          parentTile.vorgId = id
-        }
+const checkForSpawns = assign<GameContext, GameEvent>((context) => {
+  const tiles = context.tileResources.reduce<Record<string, ResourceData[]>>(
+    (collection, tile) => {
+      const parent = context.tiles.find(
+        (contextTile) => contextTile.id === tile.parent
+      )
+      if (tile.parent && !parent?.vorgId) {
         return {
-          id,
-          x: parentTile?.x ?? 0,
-          y: parentTile?.y ?? 0,
-          type,
-          health: 2,
-          resourceSpawns,
+          ...collection,
+          [tile.parent]: collection[tile.parent]
+            ? [...collection[tile.parent], tile]
+            : [tile],
         }
-      })
-    if (spawns.length) {
-      return [...context.vorgs, ...spawns]
-    }
-    return context.vorgs
-  },
+      }
+      return collection
+    },
+    {}
+  )
+  const spawns: VorgData[] = Object.values(tiles)
+    .filter((resources) => resources.length >= 2)
+    .map((resources) => {
+      const parentTile = context.tiles.find(
+        (tile) => resources[0].parent === tile.id
+      )
+      const type = checkResources(resources)
+      if (!type) {
+        throw new Error("No matching vorg for these resources!")
+      }
+      const resourceSpawns = matchResourcesToType(type)
+      const id = uniqueId()
+      if (parentTile) {
+        parentTile.vorgId = id
+      }
+      return {
+        id,
+        x: parentTile?.x ?? 0,
+        y: parentTile?.y ?? 0,
+        type,
+        health: 2,
+        resourceSpawns,
+      }
+    })
+  if (spawns.length) {
+    context.vorgs = [...context.vorgs, ...spawns]
+  }
 })
 
 export default checkForSpawns

@@ -1,4 +1,4 @@
-import { assign } from "xstate"
+import { assign } from "@xstate/immer"
 import { uniqueId } from "xstate/lib/utils"
 import isColliding from "../../utils/circleCollision"
 import { GameContext, GameEvent } from "../gameTypes"
@@ -26,11 +26,7 @@ const handleResourceTileDrop = assign<GameContext, GameEvent>(
         collidingResource.id = uniqueId()
         collidingResource.parent = updatedTile.id
       }
-      return {
-        tileResources: context.tileResources,
-      }
     }
-    return context
   }
 )
 

@@ -1,4 +1,4 @@
-import { assign } from "xstate"
+import { assign } from "@xstate/immer"
 import isColliding from "../../utils/circleCollision"
 import { GameContext, GameEvent } from "../gameTypes"
 
@@ -19,7 +19,6 @@ const handleResourceDrop = assign<GameContext, GameEvent>((context, event) => {
     const otherResourcesOnThatTile = context.tileResources.filter(
       (resource) => resource.parent === updatedTile.id
     )
-    let tileResources
     if (removed) {
       const updated = {
         ...removed,
@@ -27,17 +26,11 @@ const handleResourceDrop = assign<GameContext, GameEvent>((context, event) => {
         x: updatedTile.x + 30 * otherResourcesOnThatTile.length,
         y: updatedTile.y + 80,
       }
-      tileResources = [...context.tileResources, updated]
-    } else {
-      tileResources = context.tileResources
+      context.tileResources = [...context.tileResources, updated]
     }
 
-    return {
-      resources: duplicateResources,
-      tileResources,
-    }
+    context.resources = duplicateResources
   }
-  return context
 })
 
 export default handleResourceDrop

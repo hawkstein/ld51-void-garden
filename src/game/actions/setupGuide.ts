@@ -1,4 +1,4 @@
-import { assign } from "xstate"
+import { assign } from "@xstate/immer"
 import { GameContext, GameEvent, VorgType } from "../gameTypes"
 
 const setupGuide = assign<GameContext, GameEvent>((context, event) => {
@@ -42,10 +42,8 @@ const setupGuide = assign<GameContext, GameEvent>((context, event) => {
     y = 500 / 2
   }
 
-  return {
-    currentGuide: nextGuide,
-    guideTarget: { x, y, withArrow },
-  }
+  context.currentGuide = nextGuide
+  context.guideTarget = { x, y, withArrow }
 })
 
 export default setupGuide
