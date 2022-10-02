@@ -16,6 +16,27 @@ const checkResources = (resources: ResourceData[]): VorgType | null => {
   if (resources.every((r) => r.type === ResourceType.Energy)) {
     return VorgType.Extractor
   }
+  const countOfResources = resources.reduce<Record<ResourceType, number>>(
+    (totals, resource) => {
+      return { ...totals, [resource.type]: (totals[resource.type] += 1) }
+    },
+    {
+      [ResourceType.Compound]: 0,
+      [ResourceType.Energy]: 0,
+      [ResourceType.Exotic]: 0,
+      [ResourceType.Seed]: 0,
+    }
+  )
+  if (
+    countOfResources.Compound >= 1 &&
+    countOfResources.Energy >= 1 &&
+    countOfResources.Exotic >= 1
+  ) {
+    return VorgType.Flower
+  }
+  if (countOfResources.Compound >= 1 && countOfResources.Energy >= 1) {
+    return VorgType.Colony
+  }
   return null
 }
 
@@ -31,6 +52,12 @@ const matchResourcesToType = (vorgType: VorgType) => {
       { offsetX: 5, offsetY: 5, type: ResourceType.Compound },
       { offsetX: 40, offsetY: 5, type: ResourceType.Compound },
     ]
+  }
+  if (vorgType === VorgType.Colony) {
+    return [{ offsetX: 5, offsetY: 5, type: ResourceType.Exotic }]
+  }
+  if (vorgType === VorgType.Flower) {
+    return [{ offsetX: 5, offsetY: 5, type: ResourceType.Seed }]
   }
   return []
 }
