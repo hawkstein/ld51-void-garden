@@ -46,6 +46,7 @@ export default function Resource({ id, type, x, y, onDragEnd }: ResourceProps) {
   const container = useRef<HTMLDivElement>(null)
   return (
     <motion.div
+      id={id}
       ref={container}
       drag
       initial={{ scale: 0.5, opacity: 0 }}
