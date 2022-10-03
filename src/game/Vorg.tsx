@@ -19,11 +19,11 @@ type VorgProps = {
 }
 
 const vorgMappedToType: Record<VorgType, ReactElement> = {
-  [VorgType.Seed]: <SeedVorg />,
-  [VorgType.Collector]: <CollectorVorg />,
-  [VorgType.Extractor]: <ExtractorVorg />,
-  [VorgType.Colony]: <ColonyVorg />,
-  [VorgType.Flower]: <FruitVorg />,
+  [VorgType.Seed]: <SeedVorg height="100px" />,
+  [VorgType.Collector]: <CollectorVorg height="100px" />,
+  [VorgType.Extractor]: <ExtractorVorg height="100px" />,
+  [VorgType.Colony]: <ColonyVorg height="100px" />,
+  [VorgType.Flower]: <FruitVorg height="100px" />,
 }
 
 const vorgFromType = (type: VorgType) => vorgMappedToType[type]

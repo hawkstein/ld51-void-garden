@@ -16,10 +16,10 @@ type ResourceProps = {
 }
 
 const mappedComponents = {
-  [ResourceType.Energy]: <Energy />,
-  [ResourceType.Compound]: <Compound />,
-  [ResourceType.Exotic]: <Exotic />,
-  [ResourceType.Seed]: <Fruit />,
+  [ResourceType.Energy]: <Energy height="20px" />,
+  [ResourceType.Compound]: <Compound height="20px" />,
+  [ResourceType.Exotic]: <Exotic height="20px" />,
+  [ResourceType.Seed]: <Fruit height="20px" />,
 }
 
 const getComponent = (type: ResourceType) => mappedComponents[type]

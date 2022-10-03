@@ -11,7 +11,7 @@ export default function MainMenu() {
   return (
     <div className={styles.mainMenu}>
       <div>
-        <Title />
+        <Title height="120px" />
       </div>
       <Stack className={styles.menuStack}>
         <Button
